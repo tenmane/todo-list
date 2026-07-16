@@ -1,3 +1,5 @@
-## Webpack Template
+## Todo List
 
-Includes package.json and webpack config that switches between developer and production mode.
+A basic todo list website that allows the user to create projects that contain a list of todos and uses localStorage.
+
+This project was made according to The Odin Project.
