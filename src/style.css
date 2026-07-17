@@ -72,6 +72,32 @@ nav img {
   width: 1.5rem;
 }
 
+.projects {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  align-self: start;
+  padding: 0;
+}
+
+.projects-holder {
+  font-size: 0.8rem;
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+.listed-project {
+  padding: 0.2rem;
+  cursor: pointer;
+}
+
+.listed-project:hover {
+  font-weight: bold;
+}
+
 nav>label {
   display: flex;
   flex-direction: column;

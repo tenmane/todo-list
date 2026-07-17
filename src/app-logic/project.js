@@ -10,4 +10,8 @@ class createProject {
 }
 
 const defaultProject = new createProject("Default");
+const proj2 = new createProject("Yer");
+const proj3 = new createProject("Yer");
 defaultProject.addProject();
+proj2.addProject();
+proj3.addProject();
