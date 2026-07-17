@@ -1,30 +1,53 @@
-export { DOMStuff };
+import projectsArray from "../app-logic/project.js";
+import deleteIconLocation from "../images/icons/delete.svg";
 
 const DOMgetter = {
   container: document.querySelector(".content"),
   projectContainer: document.querySelector(".projects-holder"),
 }
 
-const DOMStuff = {
-  addProject: function (name) {
-    const title = document.createElement("h1");
-    title.classList.add("project-title");
-    title.textContent = name;
-
-    DOMgetter.container.appendChild(title);
-
-    this.listProject(name);
-  },
+export const DOMStuff = {
   listProject: function (name) {
-    DOMgetter.projectContainer.classList.add("projects-holder");
+    const projectBox = document.createElement("div");
+    projectBox.classList.add("project-box");
 
     const project = document.createElement("li");
     project.classList.add("listed-project");
     project.textContent = name;
-    DOMgetter.projectContainer.append(project);
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.classList.add("delete-btn");
+    const deleteIcon = document.createElement("img");
+    deleteIcon.src = deleteIconLocation;
+    deleteIcon.alt = "Delete";
+    deleteBtn.append(deleteIcon);
+
+    projectBox.append(project, deleteBtn);
+
+    DOMgetter.projectContainer.append(projectBox);
+
+    project.addEventListener("click", function () {
+      DOMgetter.container.innerHTML = "";
+      const selectedProj = projectsArray.find(proj => proj.name === project.textContent);
+      DOMStuff.displayProject(selectedProj);
+    })
+
+    deleteBtn.addEventListener("click", function () {
+      const index = projectsArray.findIndex(proj => proj.name === name);
+      DOMStuff.deleteProject(index);
+      projectBox.remove();
+    })
   },
   toggleVisibility: function (container) {
     container.classList.toggle("active");
+  },
+  displayProject: function (selectedProj) {
+    const title = document.createElement("h1");
+    title.textContent = selectedProj.name;
+    DOMgetter.container.append(title);
+  },
+  deleteProject: function (index) {
+    projectsArray.splice(index, 1);
   }
 }
 

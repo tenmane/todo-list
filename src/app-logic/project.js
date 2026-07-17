@@ -1,17 +1,19 @@
 import { DOMStuff } from "../dom/DOMControl.js";
 
-class createProject {
+class CreateProject {
   constructor(name) {
     this.name = name;
+    this.todos = [];
+    CreateProject.projects.push(this);
   }
-  addProject() {
-    DOMStuff.addProject(this.name);
-  }
+  static projects = [];
 }
 
-const defaultProject = new createProject("Default");
-const proj2 = new createProject("Yer");
-const proj3 = new createProject("Yer");
-defaultProject.addProject();
-proj2.addProject();
-proj3.addProject();
+const defaultProject = new CreateProject("Default");
+const proj2 = new CreateProject("Yer");
+const proj3 = new CreateProject("Yer");
+DOMStuff.listProject(defaultProject.name);
+DOMStuff.listProject(proj2.name);
+DOMStuff.listProject(proj3.name);
+
+export default CreateProject.projects;

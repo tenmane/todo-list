@@ -10,7 +10,7 @@ body {
   display: grid;
   grid-template-rows: auto 1fr;
   gap: 1.5rem;
-  padding: 0.5vw 5vw;
+  padding: 0.5vw 1vw;
   background-color: rgb(234, 241, 241);
 }
 
@@ -81,12 +81,12 @@ nav img {
 }
 
 .projects-holder {
-  font-size: 0.8rem;
-  display: none;
+  font-size: 0.9rem;
+  display: block;
 }
 
 .active {
-  display: block;
+  display: none;
 }
 
 .listed-project {
@@ -98,7 +98,32 @@ nav img {
   font-weight: bold;
 }
 
-nav>label {
+.project-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-btn img {
+  width: 1.1rem;
+}
+
+
+#project-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+#project-form label {
   display: flex;
   flex-direction: column;
   font-weight: 800;
@@ -108,11 +133,34 @@ nav>label {
 }
 
 
-nav>label input[type="text"] {
-  width: 70%;
+#project-form input[type="text"] {
+  border-radius: 5px;
   font-size: 0.8rem;
   font-weight: 400;
-  padding: 0.3rem;
+  padding: 0.2rem 0.3rem;
+  border: none;
+  outline: 2px solid #3868eb;
+}
+
+
+#project-form input[type="text"]:focus {
+  outline: 2px solid #030303;
+}
+
+#project-form button {
+  background-color: transparent;
+  cursor: pointer;
+  align-self: flex-end;
+  border: none;
+  transition: opacity 0.2s;
+}
+
+button:hover {
+  opacity: 0.7;
+}
+
+button:active {
+  opacity: 0.5;
 }
 
 .content {

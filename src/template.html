@@ -8,8 +8,6 @@
   <link rel="icon" href="images/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
     rel="stylesheet">
@@ -35,13 +33,17 @@
         <button class="projects">Projects</button>
       </div>
       <ul class="projects-holder"></ul>
-      <label for="add-project">
-        Add Project:
-        <input type="text" name="project" id="add-project">
-      </label>
+      <form id="project-form">
+        <label for="add-project">
+          Add Project:
+          <input type="text" name="project" id="add-project">
+        </label>
+        <button type="submit">
+          <img src="images/icons/add.svg" alt="">
+        </button>
+      </form>
     </nav>
     <div class="content">
-
     </div>
   </main>
 </body>
