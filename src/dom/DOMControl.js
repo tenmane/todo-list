@@ -4,6 +4,7 @@ import deleteIconLocation from "../images/icons/delete.svg";
 const DOMgetter = {
   container: document.querySelector(".content"),
   projectContainer: document.querySelector(".projects-holder"),
+  form: document.querySelector("#project-form"),
 }
 
 export const DOMStuff = {
@@ -27,7 +28,6 @@ export const DOMStuff = {
     DOMgetter.projectContainer.append(projectBox);
 
     project.addEventListener("click", function () {
-      DOMgetter.container.innerHTML = "";
       const selectedProj = projectsArray.find(proj => proj.name === project.textContent);
       DOMStuff.displayProject(selectedProj);
     })
@@ -42,13 +42,14 @@ export const DOMStuff = {
     container.classList.toggle("active");
   },
   displayProject: function (selectedProj) {
+    DOMgetter.container.innerHTML = "";
     const title = document.createElement("h1");
     title.textContent = selectedProj.name;
     DOMgetter.container.append(title);
   },
   deleteProject: function (index) {
     projectsArray.splice(index, 1);
-  }
+  },
 }
 
 const projectsContainer = document.querySelector(".projects-btn-container");
