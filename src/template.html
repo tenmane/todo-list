@@ -18,6 +18,7 @@
     <img src="images/logo.png" alt="Site Logo">
     <span class="title">ToDo</span>
   </header>
+
   <main>
     <nav>
       <div>
@@ -43,9 +44,52 @@
         </button>
       </form>
     </nav>
+
     <div class="content">
+      <div class="content-heading">
+        <h1 class="project-title"></h1>
+        <button class="add-todo">
+          <img src="./images/icons/add.svg" alt="">
+          Add Todo
+        </button>
+      </div>
     </div>
   </main>
+
+  <dialog closedby="any" id="todo-modal">
+    <form id="todo-form">
+      <fieldset class="input-fields">
+        <div>
+          <label for="title">TITLE</label>
+          <input type="text" name="title" id="title" required>
+        </div>
+        <div>
+          <label for="description">DESCRIPTION (optional)</label>
+          <textarea name="description" id="description" rows="5"></textarea>
+        </div>
+        <div>
+          <label for="date">DUE DATE</label>
+          <input type="date" name="date" id="date" required>
+        </div>
+      </fieldset>
+      <fieldset class="priority-fields">
+        <label for="priority">PRIORITY</label>
+        <select name="priority" id="priority">
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+      </fieldset>
+      <fieldset class="todo-btn-fields">
+        <button type="submit" class="submit-todo">
+          Submit
+        </button>
+        <button class="cancel-todo">
+          Cancel
+        </button>
+      </fieldset>
+    </form>
+  </dialog>
 </body>
 
 </html>

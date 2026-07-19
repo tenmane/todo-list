@@ -1,13 +1,18 @@
 import projectsArray from "../app-logic/project.js";
+import todoArray from "../app-logic/todo.js";
 import deleteIconLocation from "../images/icons/delete.svg";
 
 const DOMgetter = {
   container: document.querySelector(".content"),
   projectContainer: document.querySelector(".projects-holder"),
-  form: document.querySelector("#project-form"),
+  contentHeading: document.querySelector(".content-heading"),
+  todoBtn: document.querySelector(".add-todo"),
+  projectsContainer: document.querySelector(".projects-btn-container"),
+  todoModal: document.querySelector("#todo-modal"),
+  todoForm: document.querySelector("#todo-form"),
 }
 
-export const DOMStuff = {
+export const ProjectDOM = {
   listProject: function (name) {
     const projectBox = document.createElement("div");
     projectBox.classList.add("project-box");
@@ -29,30 +34,49 @@ export const DOMStuff = {
 
     project.addEventListener("click", function () {
       const selectedProj = projectsArray.find(proj => proj.name === project.textContent);
-      DOMStuff.displayProject(selectedProj);
+      ProjectDOM.displayProject(selectedProj);
     })
 
     deleteBtn.addEventListener("click", function () {
       const index = projectsArray.findIndex(proj => proj.name === name);
-      DOMStuff.deleteProject(index);
+      ProjectDOM.deleteProject(index);
       projectBox.remove();
     })
   },
+
   toggleVisibility: function (container) {
     container.classList.toggle("active");
   },
+
   displayProject: function (selectedProj) {
-    DOMgetter.container.innerHTML = "";
-    const title = document.createElement("h1");
+    const title = document.querySelector(".project-title");
     title.textContent = selectedProj.name;
-    DOMgetter.container.append(title);
+    activeProj = selectedProj;
   },
+
   deleteProject: function (index) {
     projectsArray.splice(index, 1);
   },
 }
 
-const projectsContainer = document.querySelector(".projects-btn-container");
-projectsContainer.addEventListener("click", function () {
-  DOMStuff.toggleVisibility(DOMgetter.projectContainer);
+let activeProj = null;
+
+export const TodoDOM = {
+  addTodo: function () {
+    DOMgetter.todoForm.addEventListener("click", function () {
+
+    })
+  },
+  listTodo: function () {
+
+  },
+}
+
+
+DOMgetter.projectsContainer.addEventListener("click", function () {
+  ProjectDOM.toggleVisibility(DOMgetter.projectContainer);
 });
+
+DOMgetter.todoBtn.addEventListener("click", function () {
+  DOMgetter.todoModal.showModal();
+})

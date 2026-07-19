@@ -1,4 +1,4 @@
-import { DOMStuff } from "../dom/DOMControl.js";
+import { ProjectDOM } from "../dom/DOMControl.js";
 
 export class CreateProject {
   constructor(name) {
@@ -12,17 +12,17 @@ export class CreateProject {
 const defaultProject = new CreateProject("Default");
 const proj2 = new CreateProject("Waslsdasd");
 const proj3 = new CreateProject("asdaad");
-DOMStuff.listProject(defaultProject.name);
-DOMStuff.listProject(proj2.name);
-DOMStuff.listProject(proj3.name);
-DOMStuff.displayProject(defaultProject);
+ProjectDOM.listProject(defaultProject.name);
+ProjectDOM.listProject(proj2.name);
+ProjectDOM.listProject(proj3.name);
+ProjectDOM.displayProject(defaultProject);
 
-const form = document.querySelector("#project-form");
-form.addEventListener("submit", function (e) {
+const projForm = document.querySelector("#project-form");
+projForm.addEventListener("submit", function (e) {
   e.preventDefault();
   const input = document.querySelector("#add-project");
   const project = new CreateProject(input.value);
-  DOMStuff.listProject(project.name);
+  ProjectDOM.listProject(project.name);
   input.value = "";
 })
 
