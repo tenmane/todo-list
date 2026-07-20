@@ -5,13 +5,14 @@ import editIconLocation from "../images/icons/edit.svg";
 export let activeProj = null;
 export let editing = false;
 let getIndex = null;
+let getProject = null;
 
 const DOMgetter = {
   container: document.querySelector(".content"),
   projectContainer: document.querySelector(".projects-holder"),
   contentHeading: document.querySelector(".content-heading"),
   todoBtn: document.querySelector(".add-todo"),
-  projectsContainer: document.querySelector(".projects-btn-container"),
+  projectsContainer: document.querySelector(".projects"),
   todoModal: document.querySelector("#todo-modal"),
   todoForm: document.querySelector("#todo-form"),
   todoList: document.querySelector("#todo-list"),
@@ -63,7 +64,7 @@ export const ProjectDOM = {
 
   deleteProject: function (index) {
     projectsArray.splice(index, 1);
-  },
+  }
 }
 
 export const TodoDOM = {
@@ -126,13 +127,13 @@ export const TodoDOM = {
 
       deleteTodo.addEventListener("click", function () {
         const index = TodoDOM.getTodoIndex(toDo);
-        TodoDOM.deleteTodo(index);
+        TodoDOM.deleteTodo(toDo, index);
         todoContainer.remove();
       })
 
       editTodo.addEventListener("click", function () {
         const index = TodoDOM.getTodoIndex(toDo);
-        TodoDOM.editTodo(index);
+        TodoDOM.editTodo(toDo, index);
       })
     }
 
@@ -153,17 +154,18 @@ export const TodoDOM = {
       TodoDOM.listTodo(selectedProj.todos[i]);
     }
   },
-  deleteTodo: function (index) {
-    activeProj.todos.splice(index, 1);
+  deleteTodo: function (toDo, index) {
+    toDo.project.todos.splice(index, 1);
   },
-  editTodo: function (index) {
+  editTodo: function (toDo, index) {
     editing = true;
+    getProject = toDo.project;
     getIndex = index;
 
-    const title = activeProj.todos[index].title;
-    const description = activeProj.todos[index].description;
-    const date = activeProj.todos[index].dueDate;
-    const priority = activeProj.todos[index].priority;
+    const title = toDo.project.todos[index].title;
+    const description = toDo.project.todos[index].description;
+    const date = toDo.project.todos[index].dueDate;
+    const priority = toDo.project.todos[index].priority;
 
     document.querySelector("#title").value = title;
     document.querySelector("#description").value = description;
@@ -172,18 +174,25 @@ export const TodoDOM = {
 
     DOMgetter.todoModal.showModal();
   },
-  sumbitTodoEdit: function (index) {
-    activeProj.todos[getIndex].title = document.querySelector("#title").value;
-    activeProj.todos[getIndex].description = document.querySelector("#description").value;
-    activeProj.todos[getIndex].dueDate = document.querySelector("#date").value;
-    activeProj.todos[getIndex].priority = document.querySelector("#priority").value;
+  submitTodoEdit: function () {
+    getProject.todos[getIndex].title = document.querySelector("#title").value;
+    getProject.todos[getIndex].description = document.querySelector("#description").value;
+    getProject.todos[getIndex].dueDate = document.querySelector("#date").value;
+    getProject.todos[getIndex].priority = document.querySelector("#priority").value;
 
-    this.listTodo(activeProj.todos[getIndex]);
+    this.listTodo(getProject.todos[getIndex]);
     editing = false;
   },
   getTodoIndex: function (toDo) {
-    const index = activeProj.todos.findIndex(todo => todo === toDo);
+    const index = toDo.project.todos.findIndex(todo => todo === toDo);
     return index;
+  },
+  clearContent: function () {
+    DOMgetter.todoList.innerHTML = "";
+  },
+  setAllTaskTitle: function () {
+    const title = document.querySelector(".project-title");
+    title.textContent = "All Tasks";
   }
 }
 

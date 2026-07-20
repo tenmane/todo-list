@@ -21,23 +21,21 @@
 
   <main>
     <nav>
-      <div>
+      <button class="all-tasks">
         <img src="images/icons/tasks.svg" alt="All tasks">
         <span>All tasks</span>
-      </div>
-      <div>
-        <img src="images/icons/important.svg" alt="important tasks">
-        <span>Important</span>
-      </div>
-      <div class="projects-btn-container">
+      </button>
+
+      <button class="projects">
         <img src="images/icons/project.svg" alt="Projects icon">
-        <button class="projects">Projects</button>
-      </div>
+        <span>Projects</span>
+      </button>
       <ul class="projects-holder"></ul>
+
       <form id="project-form">
         <label for="add-project">
           Add Project:
-          <input type="text" name="project" id="add-project">
+          <input type="text" name="project" id="add-project" required>
         </label>
         <button type="submit">
           <img src="images/icons/add.svg" alt="">

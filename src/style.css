@@ -28,7 +28,7 @@ header {
   font-size: 3.3rem;
   font-weight: 600;
   text-shadow: 1px 1px 0.5rem rgb(28, 91, 94);
-  background-color: var(--primary-color);
+  background-color: rgb(183, 231, 229);
   box-shadow: var(--primary-box-shadow), var(--secondary-box-shadow);
   border-radius: 20px;
 }
@@ -57,9 +57,11 @@ nav {
   box-shadow: var(--primary-box-shadow), var(--secondary-box-shadow);
 }
 
-nav>div {
+nav>button {
   display: grid;
   grid-template-columns: auto 1fr;
+  background-color: transparent;
+  border: none;
   gap: 0.5rem;
   align-items: center;
   justify-items: start;
@@ -70,7 +72,7 @@ nav>div {
   border-radius: 20px;
 }
 
-nav>div:hover {
+nav>button:hover {
   font-weight: 700;
   background-color: var(--primary-color);
 }
@@ -80,13 +82,6 @@ nav img {
 }
 
 /* PROJECTS LIST */
-.projects {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  align-self: start;
-  padding: 0;
-}
 
 .projects-holder {
   font-size: 0.9rem;
@@ -182,14 +177,14 @@ nav img {
   justify-content: space-between;
   width: 100%;
   height: fit-content;
-  background-color: rgb(183, 231, 229);
-  border-bottom: 2px solid rgb(108, 134, 141);
+  background-color: var(--primary-color);
+  border-bottom: 2px solid rgb(131, 159, 167);
   padding: 2rem;
 }
 
 .project-title {
   font-size: 3rem;
-  text-shadow: 1px 1px 0.5rem rgb(28, 91, 94);
+  text-shadow: 1px 1px 0.2rem rgb(28, 91, 94);
 }
 
 .add-todo {

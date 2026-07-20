@@ -1,14 +1,16 @@
 import { activeProj } from "../dom/DOMControl.js";
 import { editing } from "../dom/DOMControl.js";
 import { TodoDOM } from "../dom/DOMControl.js";
+import projectsArray from "./project.js";
 
 
 class CreateTodo {
-  constructor(title, description, dueDate, priority) {
+  constructor(title, description, dueDate, priority, project) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
+    this.project = project;
     CreateTodo.todo.push(this);
   }
   static todo = [];
@@ -26,14 +28,14 @@ todoForm.addEventListener("submit", function (e) {
   const priority = document.querySelector("#priority").value;
 
   if (!editing) {
-    const toDo = new CreateTodo(title, description, date, priority);
+    const toDo = new CreateTodo(title, description, date, priority, activeProj);
     activeProj.todos.push(toDo);
     TodoDOM.listTodo(toDo);
     TodoDOM.closeTodoModal();
     toDo.created = true;
   }
   else {
-    TodoDOM.sumbitTodoEdit();
+    TodoDOM.submitTodoEdit();
     TodoDOM.closeTodoModal();
   }
 })
@@ -41,4 +43,13 @@ todoForm.addEventListener("submit", function (e) {
 const cancelBtn = document.querySelector(".cancel-todo");
 cancelBtn.addEventListener("click", function (e) {
   TodoDOM.closeTodoModal();
+})
+
+const allTasks = document.querySelector(".all-tasks");
+allTasks.addEventListener("click", function () {
+  TodoDOM.clearContent();
+  TodoDOM.setAllTaskTitle();
+  for (let i = 0; i < projectsArray.length; i++) {
+    projectsArray[i].todos.forEach(todo => TodoDOM.listTodo(todo));
+  }
 })
