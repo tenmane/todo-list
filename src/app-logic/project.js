@@ -10,11 +10,7 @@ export class CreateProject {
 }
 
 const defaultProject = new CreateProject("Default");
-const proj2 = new CreateProject("Waslsdasd");
-const proj3 = new CreateProject("asdaad");
 ProjectDOM.listProject(defaultProject.name);
-ProjectDOM.listProject(proj2.name);
-ProjectDOM.listProject(proj3.name);
 ProjectDOM.displayProject(defaultProject);
 
 const projForm = document.querySelector("#project-form");
