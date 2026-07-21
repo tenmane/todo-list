@@ -9,3 +9,4 @@ import { ProjectDOM } from "./dom/DOMControl.js";
 const projects = loadProjects();
 CreateProject.projects.push(...projects);
 projects.forEach(project => ProjectDOM.listProject(project.name));
+ProjectDOM.displayProject(projects[0]);
