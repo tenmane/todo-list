@@ -11,7 +11,7 @@ export class CreateProject {
   static projects = [];
 }
 
-const projectsQuantity = JSON.parse(localStorage.getItem("projects") || []);
+const projectsQuantity = JSON.parse(localStorage.getItem("projects") || "[]");
 if (projectsQuantity.length === 0) {
   const defaultProject = new CreateProject("Default");
   ProjectDOM.listProject(defaultProject.name);
