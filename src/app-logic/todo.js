@@ -2,21 +2,19 @@ import { activeProj } from "../dom/DOMControl.js";
 import { editing } from "../dom/DOMControl.js";
 import { TodoDOM } from "../dom/DOMControl.js";
 import projectsArray from "./project.js";
-
+import { saveProject } from "./local-storage.js";
 
 class CreateTodo {
-  constructor(title, description, dueDate, priority, project) {
+  constructor(title, description, dueDate, priority, projectID) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
-    this.project = project;
+    this.projectID = projectID;
     CreateTodo.todo.push(this);
   }
   static todo = [];
 }
-
-const one = new CreateTodo("Gym", "Go to the gym at 8pm", new Date(), "high");
 
 const todoForm = document.querySelector("#todo-form");
 todoForm.addEventListener("submit", function (e) {
@@ -28,7 +26,7 @@ todoForm.addEventListener("submit", function (e) {
   const priority = document.querySelector("#priority").value;
 
   if (!editing) {
-    const toDo = new CreateTodo(title, description, date, priority, activeProj);
+    const toDo = new CreateTodo(title, description, date, priority, activeProj.id);
     activeProj.todos.push(toDo);
     TodoDOM.listTodo(toDo);
     TodoDOM.closeTodoModal();
@@ -38,6 +36,7 @@ todoForm.addEventListener("submit", function (e) {
     TodoDOM.submitTodoEdit();
     TodoDOM.closeTodoModal();
   }
+  saveProject(projectsArray);
 })
 
 const cancelBtn = document.querySelector(".cancel-todo");

@@ -162,7 +162,7 @@ nav img {
 /* MAIN CONTENT */
 .content {
   background-color: var(--secondary-color);
-  border-radius: 20px;
+  border-radius: 25px;
   box-shadow: var(--primary-box-shadow), var(--secondary-box-shadow);
   display: flex;
   flex-direction: column;

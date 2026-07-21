@@ -1,3 +1,4 @@
+import { saveProject } from "../app-logic/local-storage.js";
 import projectsArray from "../app-logic/project.js";
 import deleteIconLocation from "../images/icons/delete.svg";
 import editIconLocation from "../images/icons/edit.svg";
@@ -64,6 +65,11 @@ export const ProjectDOM = {
 
   deleteProject: function (index) {
     projectsArray.splice(index, 1);
+    saveProject(projectsArray);
+  },
+
+  getProjectById: function (projectID) {
+    return projectsArray.find(proj => proj.id === projectID);
   }
 }
 
@@ -155,17 +161,19 @@ export const TodoDOM = {
     }
   },
   deleteTodo: function (toDo, index) {
-    toDo.project.todos.splice(index, 1);
+    const project = ProjectDOM.getProjectById(toDo.projectID);
+    project.todos.splice(index, 1);
+    saveProject(projectsArray);
   },
   editTodo: function (toDo, index) {
     editing = true;
-    getProject = toDo.project;
+    getProject = ProjectDOM.getProjectById(toDo.projectID);
     getIndex = index;
 
-    const title = toDo.project.todos[index].title;
-    const description = toDo.project.todos[index].description;
-    const date = toDo.project.todos[index].dueDate;
-    const priority = toDo.project.todos[index].priority;
+    const title = getProject.todos[index].title;
+    const description = getProject.todos[index].description;
+    const date = getProject.todos[index].dueDate;
+    const priority = getProject.todos[index].priority;
 
     document.querySelector("#title").value = title;
     document.querySelector("#description").value = description;
@@ -184,7 +192,8 @@ export const TodoDOM = {
     editing = false;
   },
   getTodoIndex: function (toDo) {
-    const index = toDo.project.todos.findIndex(todo => todo === toDo);
+    const project = ProjectDOM.getProjectById(toDo.projectID);
+    const index = project.todos.findIndex(todo => todo === toDo);
     return index;
   },
   clearContent: function () {
