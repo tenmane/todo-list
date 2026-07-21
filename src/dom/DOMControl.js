@@ -1,5 +1,6 @@
 import { saveProject } from "../app-logic/local-storage.js";
-import projectsArray from "../app-logic/project.js";
+import { getProjects, makeProject } from "../app-logic/project.js";
+import { makeTodo } from "../app-logic/todo.js";
 import deleteIconLocation from "../images/icons/delete.svg";
 import editIconLocation from "../images/icons/edit.svg";
 
@@ -40,13 +41,13 @@ export const ProjectDOM = {
     DOMgetter.projectContainer.append(projectBox);
 
     project.addEventListener("click", function () {
-      const selectedProj = projectsArray.find(proj => proj.name === project.textContent);
+      const selectedProj = getProjects().find(proj => proj.name === project.textContent);
       DOMgetter.todoList.innerHTML = "";
       ProjectDOM.displayProject(selectedProj);
     })
 
     deleteBtn.addEventListener("click", function () {
-      const index = projectsArray.findIndex(proj => proj.name === name);
+      const index = getProjects().findIndex(proj => proj.name === name);
       ProjectDOM.deleteProject(index);
       projectBox.remove();
     })
@@ -64,12 +65,12 @@ export const ProjectDOM = {
   },
 
   deleteProject: function (index) {
-    projectsArray.splice(index, 1);
-    saveProject(projectsArray);
+    getProjects().splice(index, 1);
+    saveProject(getProjects());
   },
 
   getProjectById: function (projectID) {
-    return projectsArray.find(proj => proj.id === projectID);
+    return getProjects().find(proj => proj.id === projectID);
   }
 }
 
@@ -163,7 +164,7 @@ export const TodoDOM = {
   deleteTodo: function (toDo, index) {
     const project = ProjectDOM.getProjectById(toDo.projectID);
     project.todos.splice(index, 1);
-    saveProject(projectsArray);
+    saveProject(getProjects());
   },
   editTodo: function (toDo, index) {
     editing = true;
@@ -212,4 +213,56 @@ DOMgetter.projectsContainer.addEventListener("click", function () {
 
 DOMgetter.todoBtn.addEventListener("click", function () {
   DOMgetter.todoModal.showModal();
+})
+
+const projectsQuantity = JSON.parse(localStorage.getItem("projects") || "[]");
+if (projectsQuantity.length === 0) {
+  const defaultProject = makeProject("Default");
+}
+
+const projForm = document.querySelector("#project-form");
+projForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const input = document.querySelector("#add-project");
+  const project = makeProject(input.value);
+  ProjectDOM.listProject(project.name);
+  input.value = "";
+  saveProject(getProjects());
+})
+
+const cancelBtn = document.querySelector(".cancel-todo");
+cancelBtn.addEventListener("click", function (e) {
+  TodoDOM.closeTodoModal();
+})
+
+const allTasks = document.querySelector(".all-tasks");
+allTasks.addEventListener("click", function () {
+  TodoDOM.clearContent();
+  TodoDOM.setAllTaskTitle();
+  for (let i = 0; i < getProjects().length; i++) {
+    getProjects()[i].todos.forEach(todo => TodoDOM.listTodo(todo));
+  }
+})
+
+const todoForm = document.querySelector("#todo-form");
+todoForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const title = document.querySelector("#title").value;
+  const description = document.querySelector("#description").value;
+  const date = document.querySelector("#date").value;
+  const priority = document.querySelector("#priority").value;
+
+  if (!editing) {
+    const toDo = makeTodo(title, description, date, priority, activeProj.id);
+    activeProj.todos.push(toDo);
+    TodoDOM.listTodo(toDo);
+    TodoDOM.closeTodoModal();
+    toDo.created = true;
+  }
+  else {
+    TodoDOM.submitTodoEdit();
+    TodoDOM.closeTodoModal();
+  }
+  saveProject(getProjects());
 })
