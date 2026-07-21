@@ -4,6 +4,10 @@ A basic todo list website that allows the user to create projects that contain a
 
 This project was made according to The Odin Project.
 
+Live Preview:
+
+https://tenmane.github.io/todo-list/
+
 Preview:
 
 <img width="2539" height="1251" alt="image" src="https://github.com/user-attachments/assets/00edfc1f-610f-4a70-bf6f-88c14a671300" />
@@ -14,6 +18,3 @@ Preview:
 
 <img width="1902" height="907" alt="image" src="https://github.com/user-attachments/assets/90122223-7408-4360-8d58-4951f475114c" />
 
-Live Preview:
-
-https://tenmane.github.io/todo-list/
