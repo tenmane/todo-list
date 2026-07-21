@@ -134,7 +134,7 @@ nav img {
   margin-top: 1rem;
 }
 
-#project-form input[type="text"] {
+#project-form input {
   border-radius: 5px;
   font-size: 0.8rem;
   font-weight: 400;
